@@ -2,20 +2,28 @@
 
 int main()
 {
-	// LINE1
-	printf("         ,r'");
-	printf("\"7\n");
-	// LINE2
-	printf("r`-_   ,'  ,/\n");
-	// LINE3
-	printf(" \\. ");
-	printf("\". L_r'\n");
-	// LINE4
-	printf("   `~\\/\n");
-	// LINE5
-	printf("      |\n");
-	// LINE6
-	printf("      |");
+	int hour;
+	int minuate;
+	int cook_time;
+	
+	scanf("%d", &hour);
+	scanf("%d", &minuate);
+	scanf("%d", &cook_time);
+	
+	minuate += cook_time;
+	
+	if(minuate >= 60)
+	{
+		hour += minuate / 60;
+		minuate %= 60;
+	}
+	
+	if(hour >= 24)
+	{
+		hour -= 24;
+	}
+	
+	printf("%d %d", hour, minuate);
 	
 	return 0;
 }

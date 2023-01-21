@@ -1,32 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
-	int full_price;
-	int kind_of_buyed;
-	int price;
-	int num;
-	int temp = 0;
+	int size;
+	int search_num;
+	int count = 0;
 	
-	scanf("%d", &full_price);
-	scanf("%d", &kind_of_buyed);
+	scanf("%d", &size);
 	
-	for(int i = 0; i < kind_of_buyed; i++)
+	int* arr = (int*)malloc(sizeof(int) * size);
+	
+	for(int i = 0; i < size; i++)
 	{
-		scanf("%d", &price);
-		scanf("%d", &num);
-		temp += price * num;
+		scanf("%d", &arr[i]);
 	}
 	
-	if(full_price == temp)
+	scanf("%d", &search_num);
+	
+	for(int i = 0; i < size; i++)
 	{
-		printf("Yes");
+		if(arr[i] == search_num)
+		{
+			count++;
+		}
 	}
 	
-	else
-	{
-		printf("No");
-	}
+	printf("%d", count);
 	
 	return 0;
 }

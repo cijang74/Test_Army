@@ -4,7 +4,6 @@
 //4. 1이 배열에 있다면 다시 처음으로 돌아가 2를 찾는다.
 //5. 반복하여 없는 수까지를 찾는다.
 //6. 없는 수를 찾았다면 두번째 없는 수는 (2)에서 구한 값과 (5)에서 구한 값의 차다.
-
 #include <stdio.h>
 
 int calculate_addNum(int student_num, int add_num)

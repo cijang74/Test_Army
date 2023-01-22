@@ -1,71 +1,80 @@
-//1. 1~30까지의 합을 구한다
-//2. (1)에서 구한 값과 입력받은 값의 합 두 개의 차를 구한다.
-//3. 배열의 처음부터 돌아가면서 1을 찾는다.
-//4. 1이 배열에 있다면 다시 처음으로 돌아가 2를 찾는다.
-//5. 반복하여 없는 수까지를 찾는다.
-//6. 없는 수를 찾았다면 두번째 없는 수는 (2)에서 구한 값과 (5)에서 구한 값의 차다.
 #include <stdio.h>
-
-int calculate_addNum(int student_num, int add_num)
-{
-	if(student_num == 0)
-	{
-		return add_num;
-	}
-	
-	else
-	{
-		add_num += student_num;
-		calculate_addNum(student_num -1, add_num);
-	}
-}
+#include <stdlib.h>
 
 int main()
 {
-	int student_num = 30;
-	int add_num = 0;
-	int student_arr [28];
-	int sum_arr = 0;
-	int key;
-	int flag = 0;
-	int x;
+	int N,M;
+	scanf("%d", &N);
+	scanf("%d", &M);
 	
-	add_num = calculate_addNum(student_num, add_num);
-	
-	for(int i = 0; i < 28; i++)
+	// 2차원 배열 동적할당 (행렬 A)
+	int **arr1 = (int**)malloc(sizeof(int*) * N);
+	for(int i = 0; i < N; i++)
 	{
-		scanf("%d", &student_arr[i]);
-		sum_arr += student_arr[i];
+		arr1[i] = (int*)malloc(sizeof(int) * M);
 	}
 	
-	key = add_num - sum_arr;
-	
-	// 1이 배열에 있다면 다시 처음으로 돌아가 2를 찾는다.
-	for(int i = 0; i < 28; i++)
+	// 2차원 배열 동적할당 (행렬 B)
+	int **arr2 = (int**)malloc(sizeof(int*) * N);
+	for(int i = 0; i < N; i++)
 	{
-		flag = 0;
-		
-		for(int j = 0; j < 28; j++)
+		arr2[i] = (int*)malloc(sizeof(int) * M);
+	}
+	
+	// 2차원 배열 동적할당 (행렬 A+B를 저장할 행렬C)
+	int **arr3 = (int**)malloc(sizeof(int*) * N);
+	for(int i = 0; i < N; i++)
+	{
+		arr3[i] = (int*)malloc(sizeof(int) * M);
+	}
+	
+	for(int i = 0; i < N; i++) // 행렬A의 원소 입력
+	{
+		for(int j = 0; j < M; j++)
 		{
-			
-			if(student_arr[j] == i+1) // 만약 1이 배열에 있다면
-			{
-				flag = 1;
-				break;
-			}
-			
-		}
-		
-		if(flag == 0)
-		{
-			x = i+1; // 없는 수 구하기
-			break;
+			scanf("%d", &arr1[i][j]);
 		}
 	}
 	
+	for(int i = 0; i < N; i++) // 행렬B의 원소 입력
+	{
+		for(int j = 0; j < M; j++)
+		{
+			scanf("%d", &arr2[i][j]);
+			arr3[i][j] = arr1[i][j] + arr2[i][j];
+		}
+	}
 	
-	printf("%d\n", x);
-	printf("%d", (key - x));
+	for(int i = 0; i < N; i++) // 행렬B의 원소 입력
+	{
+		for(int j = 0; j < M; j++)
+		{
+			printf("%d ", arr3[i][j]);
+		}
+		if(i < N-1)
+		{
+			printf("\n");
+		}
+	}
+	
+	// 동적 할당 해제
+	for(int i = 0; i < N; i++)
+	{
+		free(arr1[i]);
+	}
+	free(arr1);
+	
+	for(int i = 0; i < N; i++)
+	{
+		free(arr2[i]);
+	}
+	free(arr2);
+	
+	for(int i = 0; i < N; i++)
+	{
+		free(arr3[i]);
+	}
+	free(arr3);
 	
 	return 0;
 }

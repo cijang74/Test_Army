@@ -1,65 +1,58 @@
+// 알고리즘의 종류 사이트
+// https://hyo-ue4study.tistory.com/68
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int main()
 {
-	int white_paper[100][100];
-	int color_paper = 0;
-	int size = 0;
+	int size;
+	scanf("%d", &size);
 	
-	typedef struct Coordinate
+	int* arr = (int*)malloc(sizeof(int) * size);
+	
+	int min;
+	int temp;
+	
+	// 배열 입력
+	for(int i = 0; i < size; i++)
 	{
-		int x;
-		int y;
-	}coordinate;
-	
-	scanf("%d", &color_paper);
-	
-	coordinate* arr = (coordinate*)malloc(sizeof(coordinate) * color_paper);
-	
-	// 도화지 2차원 배열 초기화
-	for(int i = 0; i < 100; i++)
-	{
-		for(int j = 0; j <= 100; j++)
-		{
-			white_paper[i][j] = 0;
-		}
+		scanf("%d", &arr[i]);
 	}
 	
-	// 색종이의 xy좌표 입력
-	for(int i = 0; i < color_paper; i++)
+	// 선택 정렬 알고리즘: 
+	for(int i = 0; i < size - 1; i++)
 	{
-		scanf("%d", &arr[i].x);
-		scanf("%d", &arr[i].y);
-	}
-	
-	// 도화지에 색종이 그리기
-	for(int i = 0; i < color_paper; i++)
-	{
-		for(int j = arr[i].x; j < arr[i].x + 10; j++)
+		min = i;
+		for(int j = i + 1; j < size; j++)
 		{
-			for(int k = arr[i].y; k < arr[i].y + 10; k++)
+			if(arr[j] < arr[min]) // 만약 배열에서 j가 최솟값보다 작다면
 			{
-				white_paper[j][k] = 1;
+				min = j; // j가 이제부터 최솟값이다.
 			}
 		}
+		
+		// 위치 바꿔주기: 최솟값을 앞으로 옮겨줌.
+		temp = arr[min];
+		arr[min] = arr[i];
+		arr[i] = temp;
 	}
 	
-	// 도화지에 그린 색종이 크기 구하기
-	for(int i = 0; i < 100; i++)
+	// 배열 출력
+	for(int i = 0; i < size; i++)
 	{
-		for(int j = 0; j < 100; j++)
+		if(i == size - 1)
 		{
-			if(white_paper[i][j] == 1)
-			{
-				size++;
-			}
+			printf("%d", arr[i]);
+		}
+		
+		else
+		{
+			printf("%d\n", arr[i]);
 		}
 	}
 	
 	free(arr);
-	
-	printf("%d", size);
 	
 	return 0;
 }

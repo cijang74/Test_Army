@@ -2,57 +2,47 @@
 // https://hyo-ue4study.tistory.com/68
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main()
 {
-	int size;
-	scanf("%d", &size);
+	int numbers[6];
+	int min = 0;
+	int temp = 0;
+	int avg = 0;
+	int mdn = 0;
 	
-	int* arr = (int*)malloc(sizeof(int) * size);
-	
-	int min;
-	int temp;
-	
-	// 배열 입력
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < 5; i++)
 	{
-		scanf("%d", &arr[i]);
+		scanf("%d", &numbers[i]);
+		avg += numbers[i];
 	}
 	
-	// 선택 정렬 알고리즘: 
-	for(int i = 0; i < size - 1; i++)
+	// 선택 정렬 알고리즘: 오름차순 정렬
+	for(int i = 0; i < 4; i++)
 	{
+		// 처음에 비교할 수를 min으로 지정한다.
 		min = i;
-		for(int j = i + 1; j < size; j++)
+		
+		// 처음에 비교할 수의 앞의 수 부터 탐색한다.
+		for(int j = i + 1; j < 5; j++)
 		{
-			if(arr[j] < arr[min]) // 만약 배열에서 j가 최솟값보다 작다면
+			// 만약 위에서 지정한 값보다 더 작은 수를 찾았다면 그 수로 min을 지정
+			if(numbers[j] < numbers[min])
 			{
-				min = j; // j가 이제부터 최솟값이다.
+				min = j;
 			}
 		}
 		
-		// 위치 바꿔주기: 최솟값을 앞으로 옮겨줌.
-		temp = arr[min];
-		arr[min] = arr[i];
-		arr[i] = temp;
+		temp = numbers[i];
+		numbers[i] = numbers[min];
+		numbers[min] = temp;
 	}
 	
-	// 배열 출력
-	for(int i = 0; i < size; i++)
-	{
-		if(i == size - 1)
-		{
-			printf("%d", arr[i]);
-		}
-		
-		else
-		{
-			printf("%d\n", arr[i]);
-		}
-	}
+	avg /= 5;
+	mdn = numbers[2];
 	
-	free(arr);
+	printf("%d\n", avg);
+	printf("%d", mdn);
 	
 	return 0;
 }

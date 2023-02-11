@@ -3,6 +3,6 @@
 
 <b>-깃 명령어 까먹을까봐 적어놓음</b>
 1. git status
-2. git add <file>
+2. git add 
 3. git commit -m "단계: 문제번호"
 4. git push
